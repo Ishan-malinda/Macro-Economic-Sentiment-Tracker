@@ -21,21 +21,34 @@ const SentimentMeter: React.FC<SentimentMeterProps> = ({ score, label }) => {
       
       <h2 className="text-muted-foreground text-sm font-medium mb-2 uppercase tracking-widest">Market Sentiment</h2>
       
-      <div className="relative w-64 h-32 overflow-hidden flex items-end justify-center">
-        {/* Semi-circle gauge */}
-        <div className="absolute w-64 h-64 border-[16px] border-secondary rounded-full bottom-0" />
-        <div 
-          className={`absolute w-64 h-64 border-[16px] rounded-full bottom-0 transition-all duration-1000 ease-out ${
-            isBullish ? 'border-green-500' : isBearish ? 'border-red-500' : 'border-blue-500'
-          }`}
-          style={{ 
-            clipPath: 'inset(50% 0 0 0)',
-            transform: `rotate(${(percentage * 1.8) - 90}deg)`,
-            opacity: 0.8
-          }}
-        />
+      <div className="relative w-64 h-32 overflow-hidden flex items-end justify-center mt-6">
+        {/* SVG Semi-circle gauge */}
+        <svg className="absolute bottom-0 w-64 h-64 overflow-visible" viewBox="0 0 100 100">
+          {/* Background track */}
+          <path 
+            d="M 10 50 A 40 40 0 0 1 90 50" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="12" 
+            className="text-secondary opacity-50"
+            strokeLinecap="round" 
+          />
+          {/* Progress track */}
+          <path 
+            d="M 10 50 A 40 40 0 0 1 90 50" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="12" 
+            strokeDasharray="125.66" 
+            strokeDashoffset={125.66 - (percentage / 100 * 125.66)} 
+            strokeLinecap="round"
+            className={`transition-all duration-1000 ease-out ${
+              isBullish ? 'text-green-500' : isBearish ? 'text-red-500' : 'text-blue-500 shadow-blue-500/50'
+            }`} 
+          />
+        </svg>
         
-        <div className="z-10 bg-background/80 px-4 py-2 rounded-t-xl backdrop-blur-sm border-x border-t border-border">
+        <div className="z-10 bg-background/90 px-6 py-2 rounded-t-2xl backdrop-blur-md border-x border-t border-border/50 shadow-lg">
           <span className={`text-4xl font-black tracking-tighter ${
             isBullish ? 'text-green-500' : isBearish ? 'text-red-500' : 'text-blue-500'
           }`}>
