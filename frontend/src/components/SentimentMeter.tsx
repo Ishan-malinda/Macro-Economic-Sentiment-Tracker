@@ -21,39 +21,39 @@ const SentimentMeter: React.FC<SentimentMeterProps> = ({ score, label }) => {
       
       <h2 className="text-muted-foreground text-sm font-medium mb-2 uppercase tracking-widest">Market Sentiment</h2>
       
-      <div className="relative w-64 h-32 overflow-hidden flex items-end justify-center mt-6">
-        {/* SVG Semi-circle gauge */}
-        <svg className="absolute bottom-0 w-64 h-64 overflow-visible" viewBox="0 0 100 100">
-          {/* Background track */}
-          <path 
-            d="M 10 50 A 40 40 0 0 1 90 50" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="12" 
-            className="text-secondary opacity-50"
-            strokeLinecap="round" 
-          />
-          {/* Progress track */}
-          <path 
-            d="M 10 50 A 40 40 0 0 1 90 50" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="12" 
-            strokeDasharray="125.66" 
-            strokeDashoffset={125.66 - (percentage / 100 * 125.66)} 
-            strokeLinecap="round"
-            className={`transition-all duration-1000 ease-out ${
-              isBullish ? 'text-green-500' : isBearish ? 'text-red-500' : 'text-blue-500 shadow-blue-500/50'
-            }`} 
-          />
-        </svg>
+      <div className="relative w-64 h-32 overflow-hidden flex flex-col justify-end mt-4">
+        {/* Background track (half circle) */}
+        <div className="absolute top-0 left-0 w-64 h-64 rounded-full border-[16px] border-secondary" />
+
+        {/* Foreground track (moving part) */}
+        <div 
+          className={`absolute top-0 left-0 w-64 h-64 rounded-full border-[16px] transition-transform duration-1000 ease-out origin-center ${
+            isBullish ? 'border-green-500 border-b-transparent border-l-transparent' : 
+            isBearish ? 'border-red-500 border-b-transparent border-l-transparent' : 
+            'border-blue-500 border-b-transparent border-l-transparent'
+          }`}
+          style={{ 
+            /* 
+              This rotates a quarter-circle.
+              percentage 0% = rotate(-45deg) (hidden on the left)
+              percentage 50% = rotate(45deg) (pointing straight up)
+              percentage 100% = rotate(135deg) (fully visible on the right)
+            */
+            transform: `rotate(${ -45 + (percentage * 1.8)}deg)` 
+          }}
+        />
         
-        <div className="z-10 bg-background/90 px-6 py-2 rounded-t-2xl backdrop-blur-md border-x border-t border-border/50 shadow-lg">
-          <span className={`text-4xl font-black tracking-tighter ${
-            isBullish ? 'text-green-500' : isBearish ? 'text-red-500' : 'text-blue-500'
-          }`}>
-            {label.toUpperCase()}
-          </span>
+        {/* Inner Label Container */}
+        <div className="flex flex-col items-center z-10 w-full mb-[-1px]">
+          <div className="bg-background/95 w-48 py-2 rounded-t-2xl border-x border-t border-border shadow-[0_-10px_30px_rgba(0,0,0,0.5)] flex justify-center">
+             <span className={`text-4xl font-black tracking-tighter ${
+                isBullish ? 'text-green-500 drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 
+                isBearish ? 'text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]' : 
+                'text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]'
+              }`}>
+                {label.toUpperCase()}
+              </span>
+          </div>
         </div>
       </div>
       
