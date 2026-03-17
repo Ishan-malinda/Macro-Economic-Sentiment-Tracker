@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+venv/
+.next/
+dist/
+build/
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug files
+*.png
+events.json
+debug_*.png
+
+# OS files
+.DS_Store
+Thumbs.db
