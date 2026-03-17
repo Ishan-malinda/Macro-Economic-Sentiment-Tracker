@@ -1,0 +1,26 @@
+# Macro-Economic Sentiment Tracker Tasks
+
+- [x] Project Setup <!-- id: 0 -->
+    - [x] Initialize directory structure <!-- id: 1 -->
+    - [ ] Setup virtual environment for Python scraper <!-- id: 2 -->
+- [ ] Tier 1: Automation Engine (Day 1) <!-- id: 3 -->
+    - [ ] Select and inspect target economic calendar (e.g., Investing.com or ForexFactory) <!-- id: 4 -->
+    - [ ] Write Playwright script to scrape today's events <!-- id: 5 -->
+    - [ ] Implement data cleaning and normalization <!-- id: 6 -->
+- [ ] Tier 2: Data Vault (Day 2) <!-- id: 7 -->
+    - [ ] Set up PostgreSQL database (Supabase/Neon) <!-- id: 8 -->
+    - [ ] Create `economic_events` table schema <!-- id: 9 -->
+    - [ ] Integrate Python scraper with database <!-- id: 10 -->
+    - [ ] Implement sentiment calculation logic <!-- id: 11 -->
+- [ ] Tier 3: API Layer (Day 3) <!-- id: 12 -->
+    - [ ] Initialize Node.js Express project <!-- id: 13 -->
+    - [ ] Implement `GET /api/events/today` endpoint <!-- id: 14 -->
+    - [ ] Implement `GET /api/sentiment/daily` endpoint <!-- id: 15 -->
+- [ ] Tier 4: Client Dashboard (Day 4) <!-- id: 16 -->
+    - [ ] Initialize Next.js project with Tailwind CSS <!-- id: 17 -->
+    - [ ] Build "Daily Sentiment Meter" component <!-- id: 18 -->
+    - [ ] Build economic events table component <!-- id: 19 -->
+    - [ ] Connect frontend to backend API <!-- id: 20 -->
+- [ ] Final Verification & Polish <!-- id: 21 -->
+    - [ ] End-to-end testing <!-- id: 22 -->
+    - [ ] UI/UX refinements <!-- id: 23 -->
