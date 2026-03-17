@@ -67,5 +67,6 @@ npm run dev
 - **Headless Execution**: The scraper is designed to run silently in the background via Cron/Task Scheduler.
 - **Data Cleaning**: Solves the challenge of scraping inconsistent web text and converting it into "math-ready" integers.
 
+Live Site - https://macro-economic-sentiment-tracker.vercel.app/
 ---
-Built with ❤️ by [Ishan Malinda](https://github.com/Ishan-malinda)
+Built with  by [Ishan Malinda](https://github.com/Ishan-malinda)
