@@ -23,11 +23,14 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const eventsResponse = await fetch("http://localhost:5000/api/events/today");
+        // Next.js requires public variables to start with NEXT_PUBLIC_
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+        const eventsResponse = await fetch(`${API_URL}/api/events/today`);
+
         const eventsData = await eventsResponse.json();
         setEvents(eventsData);
 
-        const sentimentResponse = await fetch("http://localhost:5000/api/sentiment/daily");
+        const sentimentResponse = await fetch(`${API_URL}/api/sentiment/daily`);
         const sentimentData = await sentimentResponse.json();
         setSentiment(sentimentData);
       } catch (error) {
@@ -62,13 +65,13 @@ export default function Home() {
         <div className="lg:col-span-1 h-full">
           <SentimentMeter score={sentiment.score} label={sentiment.label} />
         </div>
-        
+
         <div className="lg:col-span-2 glass p-8 rounded-3xl flex flex-col justify-center border border-white/5">
           <h3 className="text-xl font-bold mb-4">Market Overview</h3>
           <p className="text-muted-foreground leading-relaxed">
-            The sentiment score is calculated by analyzing "High Impact" events and comparing the actual release numbers 
-            against the consensus forecasts. A <span className="text-green-400 font-bold">Bullish</span> score indicates economic 
-            data is performing better than expected, while a <span className="text-red-400 font-bold">Bearish</span> score suggests 
+            The sentiment score is calculated by analyzing "High Impact" events and comparing the actual release numbers
+            against the consensus forecasts. A <span className="text-green-400 font-bold">Bullish</span> score indicates economic
+            data is performing better than expected, while a <span className="text-red-400 font-bold">Bearish</span> score suggests
             underperformance.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
@@ -92,7 +95,7 @@ export default function Home() {
           <h2 className="text-2xl font-black uppercase tracking-tight">Daily Data Releases</h2>
           <span className="text-xs text-muted-foreground font-mono">UTC Timezone</span>
         </div>
-        
+
         {loading ? (
           <div className="h-64 flex items-center justify-center glass rounded-2xl">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" />
@@ -101,7 +104,7 @@ export default function Home() {
           <EventsTable events={events} />
         )}
       </section>
-      
+
       <footer className="pt-12 text-center text-xs text-muted-foreground border-t border-border/50">
         <p>© 2026 Macro-Economic Sentiment Tracker. For interview demonstration purposes.</p>
       </footer>
